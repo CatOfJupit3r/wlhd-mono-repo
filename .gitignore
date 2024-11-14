@@ -2,3 +2,5 @@
 config/.env.*
 !config/.gitkeep
 !config/.env.*.example
+mongo/data
+!mongo/.gitkeep
