@@ -1,0 +1,6 @@
+[submodule "wlhd-coordinator-server"]
+	path = wlhd-coordinator-server
+	url = https://github.com/CatOfJupit3r/wlhd-coordinator-server
+[submodule "wlhd-frontend-web"]
+	path = wlhd-frontend-web
+	url = https://github.com/CatOfJupit3r/wlhd-frontend-web
