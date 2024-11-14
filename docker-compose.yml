@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  front:
+    build: ./frontend-web
+    depends_on:
+      - coordinator
+    ports:
+      - '3000:3000'
+    env_file:
+      - config/.env.web
+
+  coordinator:
+    build: ./game-coordinator
+    depends_on:
+      - game
+      - mongo
+    ports:
+      - '5050:5000'
+    env_file:
+        - config/.env.coordinator
+        
+  game:
+    build: ./game-server
+    depends_on:
+      - dlc-service
+    env_file:
+      - config/.env.game
+      
+  mongo:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+
+  dlc-service:
+    build: ./dlc-service
+    env_file:
+      - config/.env.dlc
+
+# CURRENTLY, DISCORD IS LAUNCHED LOCALLY. IF NEEDED DOCKER-COMPOSE, UNCOMMENT THE FOLLOWING LINES
+#  discord:
+#    build: ./frontend-discord
+#    env_file:
+#      - config/.env.discord
+#    depends_on:
+#      - coordinator
