@@ -1,12 +1,15 @@
-[submodule "wlhd-coordinator-server"]
-	path = wlhd-coordinator-server
-	url = https://github.com/CatOfJupit3r/wlhd-coordinator-server
-[submodule "wlhd-frontend-web"]
-	path = wlhd-frontend-web
-	url = https://github.com/CatOfJupit3r/wlhd-frontend-web
-[submodule "wlhd-game-server"]
-	path = wlhd-game-server
+[submodule "game-server"]
+	path = game-server
 	url = https://github.com/CatOfJupit3r/wlhd-game-server
-[submodule "wlhd-frontend-discord"]
-	path = wlhd-frontend-discord
+[submodule "frontend-discord"]
+	path = frontend-discord
 	url = https://github.com/CatOfJupit3r/wlhd-frontend-discord
+[submodule "frontend-web"]
+	path = frontend-web
+	url = https://github.com/CatOfJupit3r/wlhd-frontend-web
+[submodule "coordinator-server"]
+	path = coordinator-server
+	url = https://github.com/CatOfJupit3r/wlhd-coordinator-server
+[submodule "dlc-service"]
+	path = dlc-service
+	url = https://github.com/CatOfJupit3r/wlhd-dlc-service
