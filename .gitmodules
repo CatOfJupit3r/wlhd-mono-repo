@@ -4,3 +4,9 @@
 [submodule "wlhd-frontend-web"]
 	path = wlhd-frontend-web
 	url = https://github.com/CatOfJupit3r/wlhd-frontend-web
+[submodule "wlhd-game-server"]
+	path = wlhd-game-server
+	url = https://github.com/CatOfJupit3r/wlhd-game-server
+[submodule "wlhd-frontend-discord"]
+	path = wlhd-frontend-discord
+	url = https://github.com/CatOfJupit3r/wlhd-frontend-discord
