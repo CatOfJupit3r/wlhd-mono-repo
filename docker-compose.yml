@@ -1,41 +1,97 @@
-version: '3'
+version: '3.9'
 
 services:
   front:
     build: ./frontend-web
+    container_name: front
+    networks:
+      - frontend
     depends_on:
-      - coordinator
+      coordinator:
+        condition: service_healthy
     ports:
-      - '3000:3000'
+      - '3030:5173'
     env_file:
       - config/.env.web
+    environment:
+      - VITE_BACKEND_URL=http://coordinator:5050
+      - VITE_NODE_ENV=production
+    read_only: true
 
   coordinator:
     build: ./game-coordinator
+    container_name: coordinator
+    networks:
+      - backend
+      - frontend
     depends_on:
-      - game
-      - mongo
+      mongo:
+        condition: service_healthy
+      game:
+        condition: service_healthy
     ports:
       - '5050:5000'
     env_file:
-        - config/.env.coordinator
-        
+      - config/.env.coordinator
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - GAME_SERVER_URL=http://game:6060
+      - NODE_ENV=production
+    volumes:
+      - ./cdn/data:/app/dist/cdn
+      - ./installed/data:/app/dist/installed
+  
   game:
     build: ./game-server
+    networks:
+      - backend
+    container_name: game
+    restart: on-failure
+    ports:
+      - '6060:6000'
     depends_on:
-      - dlc-service
+      dlc-service:
+        condition: service_completed_successfully
     env_file:
       - config/.env.game
-      
-  mongo:
-    image: mongo
     volumes:
-      - ./data:/data/db
-
+      - ./installed/data:/app/installed
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:6000" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  
+  mongo:
+    image: mongo:6.0.4
+    container_name: mongo
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - ./mongo/data:/data/db
+      - ./mongo/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+    ports:
+      - '27017:27017'
+    env_file:
+      - config/.env.mongo
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  
   dlc-service:
     build: ./dlc-service
     env_file:
       - config/.env.dlc
+    volumes:
+      - ./installed/data:/app/installed
+
+networks:
+  backend:
+  frontend:
+
 
 # CURRENTLY, DISCORD IS LAUNCHED LOCALLY. IF NEEDED DOCKER-COMPOSE, UNCOMMENT THE FOLLOWING LINES
 #  discord:
