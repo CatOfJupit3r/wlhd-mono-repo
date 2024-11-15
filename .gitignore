@@ -4,3 +4,7 @@ config/.env.*
 !config/.env.*.example
 mongo/data
 !mongo/.gitkeep
+cdn/data
+!cdn/.gitkeep
+installed/data
+!installed/.gitkeep
