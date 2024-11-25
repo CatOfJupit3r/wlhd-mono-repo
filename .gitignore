@@ -8,3 +8,4 @@ cdn/data
 !cdn/.gitkeep
 installed/data
 !installed/.gitkeep
+data
