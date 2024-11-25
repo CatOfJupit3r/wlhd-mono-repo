@@ -13,7 +13,8 @@ const REPOS = {
     'frontend-discord': '.env.discord.example',
     'dlc-service': '.env.dlc.example',
     'game-server': '.env.game.example',
-    'frontend-web': '.env.web.example'
+    'frontend-web': '.env.web.example',
+    'cdn-service': '.env.cdn.example',
 };
 
 // Ensure the config directory exists

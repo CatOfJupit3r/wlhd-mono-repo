@@ -13,3 +13,6 @@
 [submodule "dlc-service"]
 	path = dlc-service
 	url = https://github.com/CatOfJupit3r/wlhd-dlc-service
+[submodule "cdn-service"]
+	path = cdn-service
+	url = https://github.com/CatOfJupit3r/wlhd-cdn-service
